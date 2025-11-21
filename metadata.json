@@ -1,0 +1,8 @@
+{
+  "name": "AnatomyOtter",
+  "description": "Ứng dụng tạo đề thi giải phẫu học với hai chế độ: Trắc nghiệm kiến thức và Chạy trạm (Spot Test) sử dụng AI để phân tích hình ảnh và tạo câu hỏi.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone"
+  ]
+}
