@@ -9,7 +9,7 @@ const genAI = new GoogleGenerativeAI(apiKey);
 
 // --- CẤU HÌNH MODEL (Dùng tên mã an toàn nhất) ---
 // Sử dụng hậu tố '-latest' để tự động chọn bản phù hợp nhất với Key của bạn
-const MODEL_NAME = "gemini-1.5-flash";
+const MODEL_NAME = "gemini-pro";
 
 const generationConfig = {
   temperature: 1,
