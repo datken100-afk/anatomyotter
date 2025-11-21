@@ -8,7 +8,7 @@ const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
 const ai = new GoogleGenAI({ apiKey });
 
 // UPGRADE: Use Gemini 3 Pro for superior reasoning, thinking capabilities, and context handling
-const modelId = "gemini-2.0-flash-thinking-exp-1219"; // Mình đổi tạm sang bản Flash Thinking ổn định hơn, bản Pro Preview đôi khi cần quyền truy cập đặc biệt
+const modelId = "gemini-1.5-flash"; // Mình đổi tạm sang bản Flash Thinking ổn định hơn, bản Pro Preview đôi khi cần quyền truy cập đặc biệt
 
 interface ContentFile {
     content: string;
