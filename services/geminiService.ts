@@ -8,7 +8,7 @@ const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
 const genAI = new GoogleGenerativeAI(apiKey);
 
 // Cấu hình Model
-const modelId = "gemini-1.5-flash";
+const modelId = "gemini-1.5-flash-002";
 const generationConfig = {
   temperature: 1,
   topP: 0.95,
