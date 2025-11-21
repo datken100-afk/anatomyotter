@@ -7,8 +7,9 @@ const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
 // Khởi tạo Client
 const genAI = new GoogleGenerativeAI(apiKey);
 
-// --- CẤU HÌNH MODEL (Dùng bản 002 ổn định nhất) ---
-const MODEL_NAME = "gemini-1.5-flash-002";
+// --- CẤU HÌNH MODEL (Dùng tên mã an toàn nhất) ---
+// Sử dụng hậu tố '-latest' để tự động chọn bản phù hợp nhất với Key của bạn
+const MODEL_NAME = "gemini-1.5-flash-latest";
 
 const generationConfig = {
   temperature: 1,
@@ -34,7 +35,10 @@ async function retryGeminiCall<T>(call: () => Promise<T>, retries = 3, delay = 2
   try {
     return await call();
   } catch (error: any) {
-    if (retries > 0 && (error.message?.includes("429") || error.message?.includes("503"))) {
+    // Nếu lỗi 404 (Model not found) hoặc 429/503 (Quá tải) -> Thử lại
+    const msg = error.message || "";
+    if (retries > 0 && (msg.includes("429") || msg.includes("503") || msg.includes("404"))) {
+      console.warn(`Gemini Error (${msg}). Retrying in ${delay}ms...`);
       await wait(delay);
       return retryGeminiCall(call, retries - 1, delay * 2);
     }
