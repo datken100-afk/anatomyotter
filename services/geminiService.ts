@@ -321,4 +321,29 @@ export const chatWithOtter = async (history: {role: 'user' | 'model', text: stri
         if (msg.image) {
              try {
                  const base64Data = msg.image.includes('base64,') ? msg.image.split('base64,')[1] : msg.image;
-                 const mimeType = msg.image.match(/data:([^;]+);base64,/)?.[1] ||
+                 const mimeType = msg.image.match(/data:([^;]+);base64,/)?.[1] || 'image/jpeg';
+                 parts.push({ inlineData: { mimeType, data: base64Data }});
+             } catch (e) {}
+        }
+        return { role: msg.role, parts };
+    });
+
+    const currentParts: any[] = [{ text: message }];
+    if (image) {
+        try {
+            const base64Data = image.includes('base64,') ? image.split('base64,')[1] : image;
+            const mimeType = image.match(/data:([^;]+);base64,/)?.[1] || 'image/jpeg';
+            currentParts.push({ inlineData: { mimeType, data: base64Data }});
+        } catch (e) {}
+    }
+    contents.push({ role: 'user', parts: currentParts });
+
+    try {
+        const response = await retryGeminiCall<GenerateContentResponse>(() => ai.models.generateContent({
+            model, contents, config: { systemInstruction }
+        }));
+        return response.text || "Rái cá không nghe rõ... 🦦";
+    } catch (e) {
+        return "Mạng bị nghẽn rồi... 🦦";
+    }
+};
