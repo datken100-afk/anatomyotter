@@ -2,7 +2,7 @@ import { GoogleGenerativeAI } from "@google/generative-ai";
 import { Difficulty, GeneratedMCQResponse, MentorResponse } from "../types";
 
 // --- Lấy API Key ---
-const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
+const apiKey = "AIzaSyBv6IZztbvbuE4NNolnCjPfx3Mln30K0Lw";
 
 // Khởi tạo Client
 const genAI = new GoogleGenerativeAI(apiKey);
